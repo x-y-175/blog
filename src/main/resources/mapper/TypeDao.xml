@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hua.dao.TypeDao">
+
+    <insert id="saveType" parameterType="com.hua.pojo.Type">
+        insert into blog.t_type values (#{id},#{name});
+    </insert>
+
+    <select id="getTypeById" resultType="com.hua.pojo.Type">
+        select id,name from blog.t_type where id = #{id}
+    </select>
+
+    <select id="getTypeByName" resultType="com.hua.pojo.Type">
+        select * from blog.t_type where name = #{name}
+    </select>
+
+    <!--两个id可能会相冲，取别名即可-->
+    <resultMap id="type" type="com.hua.pojo.Type">
+        <id property="id" column="tid"/>
+        <result property="name" column="name"/>
+        <!--TypeBean中 blogs是ArrayList返回的结果  Blog的所有属性都放在了blogs对象中-->
+        <!--ofType指定的是映射到list集合属性中pojo的类型-->
+        <collection property="blogs" ofType="com.hua.pojo.Blog">
+            <!-- property：主键在pojo中的属性名 -->
+            <!-- column：主键在数据库中的列名 -->
+            <id property="id" column="bid"/>
+            <result property="title" column="title"/>
+            <result property="typeId" column="type_id"/>
+        </collection>
+    </resultMap>
+
+    <select id="getAllType" resultMap="type">
+--           t_type等于t t_blog等于b   当t_type的id等于t_blog的id时， 查询
+        select t.id as tid, t.name, b.id as bid, b.title,b.type_id from blog.t_type t,blog.t_blog b where t.id = b.type_id
+    </select>
+
+    <select id="getAdminType" resultType="com.hua.pojo.Type">
+        select * from blog.t_type
+    </select>
+
+    <delete id="deleteType" >
+        delete from blog.t_type where id = #{id}
+    </delete>
+
+    <update id="updateType" parameterType="com.hua.pojo.Type">
+        update blog.t_type set name = #{name} where id = #{id};
+    </update>
+
+</mapper>

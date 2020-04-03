@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/_fragments :: head(~{::title})">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" >
+	<title>分类管理</title>
+
+</head>
+	<body>
+		<!-- 导航 -->
+		<div th:replace="admin/_fragments :: menu(2)"></div>
+		<!-- 二级导航 -->
+		<div class="ui attached pointing menu">
+			<div class="ui container">
+				<div class="right menu">
+					<a th:href="@{/admin/types/input}" class="item">新增</a>
+					<a th:href="@{/admin/types}" class="teal active item">列表</a>
+				</div>
+			</div>
+		
+		</div>
+		
+		<!-- 中间内容 -->
+		<div class="m-container-small m-padded-tb-large">
+			<div class="ui container">
+				<table class="ui celled table">
+					<thead>
+						<tr>
+							<th>名称</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr th:each="type:${pageInfo.list}">
+							<td th:text="${type.name}"></td>
+							<td>
+								<!--input(id=${type.id})代替前面的id-->
+								<a  th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini purple basic button">编辑</a>
+								<a  th:href="@{/admin/types/{id}/delete(id=${type.id})}" id="delete" onclick="return confirm('您确定要删除吗？')" class="ui mini red basic button">删除</a>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th colspan="6">
+								<div class="ui pagination menu">
+									<div class="item"><a th:href="@{/admin/types}">首页</a></div>
+									<div class="item"><a th:href="@{/admin/types(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></div>
+									<div class="item"><a th:href="@{/admin/types(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></div>
+									<div class="item"><a th:href="@{/admin/types(pageNum=${pageInfo.pages})}">尾页</a></div>
+								 </div>
+								<div class="ui segment m-inline-block">
+									<p >当前第<span th:text="${pageInfo.pageNum}"></span>页，总<span th:text="${pageInfo.pages}"></span>页，共<span th:text="${pageInfo.total}"></span>条记录</p>
+								</div>
+								 <a th:href="@{/admin/types/input}" class="ui right floated mini teal basic button">新增</a>
+							</th>
+						</tr>
+					</tfoot>
+								
+				</table>
+				
+			</div>
+		</div>
+
+		<!-- 底部 -->
+		<div  th:replace="admin/_fragments :: footer"></div>
+		<script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+		<script th:src="@{/lib/prism/prism.js}"></script>
+		<script th:src="@{/lib/tocbot/tocbot.js}"></script>
+		<script >
+			$('.menu.toggle').click(function(){
+				$('.m-item').toggleClass('m-mobile-hide');
+			});
+			$('.ui.dropdown').dropdown({
+				on: 'hover'
+			});
+
+		</script>
+		
+	</body>
+</html>

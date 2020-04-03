@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/_fragments :: head(~{::title})">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" >
+	<title>后台</title>
+
+</head>
+	<body>
+		<!-- 导航 -->
+		<div th:replace="admin/_fragments :: menu(0)"></div>
+		
+		</div>
+		
+		<!-- 中间内容 -->
+		<div class="m-container-small m-padded-tb-large">
+			<div class="ui container">
+				<div class="ui success large message">
+					<h2>Hi</h2>
+					<p>肖遥，欢迎回来！</p>
+				</div>
+				<img th:src="@{/images/one.jpg}" class="ui rounded bordered fluid image">
+			</div>
+		</div>
+
+		
+		<!-- 底部 -->
+		<!-- 底部 -->
+		<div  th:replace="admin/_fragments :: footer"></div>
+
+		<script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+		<script th:src="@{/lib/prism/prism.js}"></script>
+		<script th:src="@{/lib/tocbot/tocbot.js}"></script>
+		<script >
+			$('.menu.toggle').click(function(){
+				$('.m-item').toggleClass('m-mobile-hide');
+			});
+			$('.ui.dropdown').dropdown({
+				on: 'hover'
+			});
+			
+		</script>
+		
+	</body>
+</html>

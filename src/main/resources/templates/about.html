@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{commons/common::head(~{::title})}">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" >
+	<title>关于我</title>
+
+</head>
+	<body>
+	<!-- 导航 -->
+	<div th:replace="~{commons/common::menu(1)}"></div>
+		
+		<!-- 中间内容 -->
+		<div class="m-container-small m-padded-tb-large">
+			<div class="ui container">
+				<div class="ui stackable grid">
+					<!-- 左边图片 -->
+					<div class="eleven wide column">
+						<img th:src="@{/images/one.jpg}" style="width: 800px;height: 600px;" class="ui rounded image">
+					</div>
+					<!-- 左边图片结束 -->
+					<!-- 右边自我介绍 -->
+					<div class="five wide column">
+						<div class="ui top attached segment">
+							<div class="ui header">关于我</div>
+						</div>
+						<div class="ui attached segment">
+							<p class="m-text-thin">肖遥，一个应届毕业生，一个在生活与生存中夹缝生存的人，一个喜欢编程，喜欢学习的人。</p>
+							<p class="m-text-thin">一个喜欢编程，喜欢学习的人。</p>
+						</div>
+						<div class="ui attached segment">
+							<div class="ui orange basic left pointing label">编程</div>
+							<div class="ui orange basic left pointing label">运动</div>
+							<div class="ui orange basic left pointing label">游戏</div>
+							<div class="ui orange basic left pointing label">读书</div>
+						</div>
+						<div class="ui attached segment ">
+							<div class="ui green basic left pointing label ">Java</div>
+							<div class="ui green basic left pointing label ">JavaScript</div>
+							<div class="ui green basic left pointing label ">Spring</div>
+							<div class="ui green basic left pointing label m-margin-top-small">Mybatis</div>
+							<div class="ui green basic left pointing label m-margin-top-small">Mysql</div>
+						</div>
+						<div class="ui bottom attached segment">
+							<a href="" class="ui circular icon button"><i class="github icon"></i></a>
+							<a href="" class="ui wechat circular icon button"><i class="weixin icon"></i></a>
+							<a href="" class="ui qq circular icon button" data-content="1697601852" data-position="bottom center">
+								<i class="qq icon"></i>
+							</a>
+						</div>
+						<div class="ui wechat-qr flowing popup top left transition hidden">
+							<img th:src="@{/images/wechat.png }"style="width: 120px;" class="ui rounded image">
+						</div>
+					</div>
+					<!-- 自我介绍结束 -->
+				</div>
+			</div>
+		</div>
+
+
+	<!-- 底部 -->
+	<div th:replace="~{commons/common::footer}"></div>
+
+	<th:block th:replace="~{commons/common::script}"/>
+		<script >
+			$('.menu.toggle').click(function(){
+				$('.m-item').toggleClass('m-mobile-hide');
+			});
+			$('.qq').popup();
+			$('.wechat').popup({
+				popup:('.wechat-qr'),      //默认鼠标移动触发    
+				position: 'bottom center'
+			});
+		</script>
+	</body>
+</html>
